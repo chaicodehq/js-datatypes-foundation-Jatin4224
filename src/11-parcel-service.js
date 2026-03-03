@@ -53,20 +53,59 @@
  */
 export function parcelToJSON(parcel) {
   // Your code here
+  //   1. parcelToJSON(parcel)
+  //  *      - JSON.stringify() se parcel object ko JSON string mein convert karo
+  //  *      - try-catch use karo (circular references ke liye)
+  //  *      - Agar parcel undefined hai ya error aaye, return ""
+  //  *      - Example: parcelToJSON({id:"P001", weight:2.5})
+  //  *                 => '{"id":"P001","weight":2.5}'
+  if (parcel === undefined) return "";
+  try {
+    const s = JSON.stringify(parcel);
+    return s;
+  } catch (error) {
+    if (error) return "";
+  }
 }
 
 export function jsonToParcel(jsonString) {
   // Your code here
+  //  *   2. jsonToParcel(jsonString)
+  //  *      - JSON.parse() se JSON string ko wapas object mein convert karo
+  //  *      - try-catch use karo (invalid JSON ke liye)
+  //  *      - Agar jsonString string nahi hai ya invalid JSON hai, return null
+  //  *      - Example: jsonToParcel('{"id":"P001","weight":2.5}')
+  //  *                 => {id:"P001", weight:2.5}
+  //  *
+  if (typeof jsonString != "string") return null;
+  try {
+    const s = JSON.parse(jsonString);
+    return s;
+  } catch {
+    return null;
+  }
 }
 
 export function convertToString(value) {
   // Your code here
+  //      3. convertToString(value)
+  //  *      - String() se kisi bhi value ko string mein convert karo
+  //  *      - Example: convertToString(42) => "42"
+  //  *      - Example: convertToString(true) => "true"
+  //  *      - Example: convertToString(null) => "null"
+  //  *      - Example: convertToString(undefined) => "undefined"
+  return String(value);
 }
 
 export function convertToNumber(value) {
   // Your code here
+  const r = Number(value);
+  if (r === NaN) return NaN;
+  return r;
 }
 
 export function stringToChars(str) {
   // Your code here
+  if (typeof str != "string") return [];
+  return Array.from(str);
 }
